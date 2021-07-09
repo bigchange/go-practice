@@ -22,7 +22,7 @@ func max(x int, y int) int {
 // 2. iterative solution
 // 有点按层遍历的感觉， 就是一层一层输出，
 // 每输出一层的时候，把该层的子节点入队列
-// 每层的结果要全部输出，深度+1， 直到队列为空
+// 每层的结果要全部出队列，一层结束，深度+1， 直到队列为空
 func maxDepth2(root *TreeNode) int {
 	if root == nil {
 		return 0
