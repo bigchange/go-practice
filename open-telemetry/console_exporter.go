@@ -5,24 +5,18 @@ import (
 	"log"
 	"time"
 
-	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	_ "go.opentelemetry.io/otel/baggage"
 	"go.opentelemetry.io/otel/exporters/stdout"
-	"go.opentelemetry.io/otel/exporters/stdout"
-	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/propagation"
 	controller "go.opentelemetry.io/otel/sdk/metric/controller/basic"
 	processor "go.opentelemetry.io/otel/sdk/metric/processor/basic"
 	"go.opentelemetry.io/otel/sdk/metric/selector/simple"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
-	"go.opentelemetry.io/otel/trace"
 )
 
 func ConsoleExporter () {
-
-	otelgin
 	exporter, err := stdout.NewExporter(stdout.WithPrettyPrint(), )
 	if err != nil {
 		log.Fatalf("failed to initialize stdout exporter pipeline: %v", err)

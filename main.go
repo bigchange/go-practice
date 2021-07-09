@@ -11,32 +11,23 @@ import (
 	"fmt"
 	"runtime"
 	"sync"
+
+	"main/leetcode"
 )
+
+func leetCodeEntry() {
+	ret := leetcode.HasCycle(new(leetcode.ListNode))
+	fmt.Printf("leetCodeEntry return:%v",  ret)
+}
 
 func main() {
 	// TestSyncPool()
 	// DecoratedVisitorLoadFile()
 	// NormalVisitor()
-	fmt.Println("Hello, 世界")
-	go p()
-	q()
-	fmt.Println("Hello, background")
+	leetCodeEntry()
 }
 
 var pool *sync.Pool
-
-func p() {
-	fmt.Println("this is in p func")
-	select {
-
-	}
-	fmt.Println("this is in p2 func")
-}
-
-func q() {
-	fmt.Println("this is in q func")
-}
-
 type Person struct {
 	Name string
 	noCopy

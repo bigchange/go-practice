@@ -11,7 +11,7 @@ package leetcode
 // 双指针法
 // 慢指针： 每次往前走一步
 // 快指针： 每次往前走两步
-func hasCycle(head *ListNode) bool {
+func HasCycle(head *ListNode) bool {
 	if head == nil {
 		return false
 	}
