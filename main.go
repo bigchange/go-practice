@@ -16,7 +16,7 @@ import (
 )
 
 func leetCodeEntry() {
-	ret := leetcode.HasCycle(new(leetcode.ListNode))
+	ret := leetcode.ThreeSum([]int{-1,0,0,0,-1,-4})
 	fmt.Printf("leetCodeEntry return:%v",  ret)
 }
 
