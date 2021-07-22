@@ -12,7 +12,7 @@ import (
 	"runtime"
 	"sync"
 
-	"main/leetcode"
+	"github.com/bigchange/go-practice/leetcode"
 )
 
 func leetCodeEntry() {
