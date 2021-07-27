@@ -23,8 +23,27 @@ func leetCodeEntry() {
 	leetcode.Entry()
 }
 
+func meituan ()  {
+	var n int
+	fmt.Scanln(&n)
+	var strs []string
+	for i := 0; i < n; i++ {
+		var s string
+		fmt.Scanln(&s)
+		strs = append(strs, s)
+	}
+	for i := 0; i < n; i++ {
+		if IsValid(strs[i]) {
+			fmt.Println("Accept")
+			continue
+		}
+		fmt.Println("Wrong")
+	}
+}
+
 func main() {
 	TestF()
+	meituan()
 	// TestSyncPool()
 	// DecoratedVisitorLoadFile()
 	// NormalVisitor()
@@ -34,7 +53,7 @@ func main() {
 
 
 func TestF() {
-	// TODO
+
 }
 
 // 返回生成自然数序列的管道: 2, 3, 4, ...
