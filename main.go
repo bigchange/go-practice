@@ -8,6 +8,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"runtime"
 	"sync"
@@ -15,16 +16,59 @@ import (
 	"github.com/bigchange/go-practice/leetcode"
 )
 
+func tutorialsEntry() {
+}
+
 func leetCodeEntry() {
-	ret := leetcode.ThreeSum([]int{-1,0,0,0,-1,-4})
-	fmt.Printf("leetCodeEntry return:%v",  ret)
+	leetcode.Entry()
 }
 
 func main() {
+	TestF()
 	// TestSyncPool()
 	// DecoratedVisitorLoadFile()
 	// NormalVisitor()
+	tutorialsEntry()
 	leetCodeEntry()
+}
+
+
+func TestF() {
+	// TODO
+}
+
+// 返回生成自然数序列的管道: 2, 3, 4, ...
+func GenerateNatural(ctx context.Context) chan int {
+	ch := make(chan int)
+	go func() {
+		for i := 2; ; i++ {
+			select {
+			case <- ctx.Done():
+				return
+			case ch <- i:
+				fmt.Printf("generated %v\n", i)
+			}
+		}
+	}()
+	return ch
+}
+
+// 管道过滤器: 删除能被素数整除的数
+func PrimeFilter(ctx context.Context, in <-chan int, prime int) chan int {
+	out := make(chan int)
+	go func() {
+		for {
+			if i := <-in; i%prime != 0 {
+				select {
+				case <- ctx.Done():
+					return
+				case out <- i:
+					fmt.Printf("output %v\n", i)
+				}
+			}
+		}
+	}()
+	return out
 }
 
 var pool *sync.Pool
@@ -54,7 +98,8 @@ type Rectangle struct {
 type Square struct {
 }
 
-func (s *Square) String() {
+func (s Square) String() {
+	fmt.Println("this is a square")
 }
 
 // compile error
@@ -66,10 +111,6 @@ var _ Shape = (*Rectangle)(nil)
 
 func noCopyPerson(p *Person) {
 	p.Name = "noCopyPerson"
-}
-func copyPerson(p Person) Person {
-	p.Name = "copyPerson"
-	return p
 }
 
 func initPool() {
@@ -83,10 +124,14 @@ func initPool() {
 
 func TestSyncPool() {
 	initPool()
-	runtime.GOMAXPROCS(0)
+	runtime.GOMAXPROCS(2)
 	p := pool.Get().(*Person)
-	fmt.Println("首次从 pool 里获取：", p)
-	copyPerson(*p)
+	fmt.Printf("首次从 pool 里获取：%v \n", p)
+	// 使用 go vet . 命令可以检测出来错误（有输出的就是错误）
+	// copy := func(p Person) Person {
+	// 	p.Name = "copied"
+	// 	return p
+	// }
 	fmt.Printf("设置 p.Name = %s\n", p.Name)
 	noCopyPerson(p)
 	fmt.Printf("设置 p.Name = %s\n", p.Name)
@@ -101,8 +146,8 @@ func TestSyncPool() {
 	p2 := &Person{Name: "third"}
 	pool.Put(p2)
 
-	for i := 0; i < 10; i++ {
-		fmt.Println("Pool 调用 Get: ", pool.Get().(*Person))
+	for i := 0; i < 4; i++ {
+		fmt.Printf("Pool 调用 Get: %v \n", pool.Get().(*Person))
 	}
 }
 

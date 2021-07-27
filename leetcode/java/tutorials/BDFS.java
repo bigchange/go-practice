@@ -12,6 +12,8 @@ package com.bigchange.algorithm.leetcode.tutorials;
 public class BDFS {
 
   /*
+  BFS： 广度搜索
+  DFS： 深度搜索
   // Return the length of the shortest path between root and target node.
 
   int BFS(Node root, Node target) {

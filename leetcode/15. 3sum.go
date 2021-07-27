@@ -6,7 +6,8 @@ func ThreeSum(nums []int) [][]int {
 	return threeSum(nums)
 }
 
-// 先固定一个值 nums[i]
+// 先排好序
+// 然后固定一个值 nums[i]
 // 然后使用双指针求值： 2sum = 3sum - nums[i]
 // 注意这里去除重复的逻辑： 每次固定的值需要和上一个固定的值不一样，这样拿到的元素就不会存在重复的值了
 func threeSum(nums []int) [][]int {
