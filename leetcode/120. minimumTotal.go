@@ -16,6 +16,7 @@ func minimumTotal(triangle [][]int) int {
 	}
 	dp[0][0] = triangle[0][0]
 	for i := 1; i < m; i++ {
+		// 当前行的元素个数与当前所在的层数相等
 		for j := 0; j < i + 1; j++ {
 			dp[i][j] = math.MaxInt64
 			val := triangle[i][j]
@@ -34,6 +35,7 @@ func minimumTotal(triangle [][]int) int {
 			}
 		}
 	}
+	// 取最后一层中：数值最小的即为最小和
 	ans := math.MaxInt64
 	for i := 0; i < m; i++ {
 		ans = min(dp[m -1][i], ans)
