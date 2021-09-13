@@ -10,7 +10,7 @@ func Entry() {
 	var s string
 	flag.StringVar(&s, "s","","input string")
 	flag.Parse()
-	ret := checkValidString(s)
+	ret := numberOfBoomerangs([][]int{{0,0}, {1,0}, {-1, 0}, {0,1}, {0, -1}})
 
 	fmt.Printf("ret:[%v]\n",ret)
 
