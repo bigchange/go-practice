@@ -10,7 +10,7 @@ func Entry() {
 	var s string
 	flag.StringVar(&s, "s","","input string")
 	flag.Parse()
-	ret := numberOfBoomerangs([][]int{{0,0}, {1,0}, {-1, 0}, {0,1}, {0, -1}})
+	ret := findWords([][]byte{{'a'}},[]string{"a"})
 
 	fmt.Printf("ret:[%v]\n",ret)
 
