@@ -10,7 +10,7 @@ func Entry() {
 	var s string
 	flag.StringVar(&s, "s","","input string")
 	flag.Parse()
-	ret := findWords([][]byte{{'a'}},[]string{"a"})
+	ret := minSteps(3)
 
 	fmt.Printf("ret:[%v]\n",ret)
 
