@@ -2,7 +2,6 @@ package leetcode
 
 import "fmt"
 
-
 // corner case
 
 // [[a]]
@@ -12,18 +11,18 @@ import "fmt"
 // ["oa","oaa"]
 
 func findWords(board [][]byte, words []string) []string {
-  r := len(board)
-  c := len(board[0])
-  var rets []string
-  total := make([]byte, 26)
-  // 定义搜索的方向
-  directions := [][]int{{0,1},{0, -1},{1, 0},{-1, 0}}
+	r := len(board)
+	c := len(board[0])
+	var rets []string
+	total := make([]byte, 26)
+	// 定义搜索的方向
+	directions := [][]int{{0, 1}, {0, -1}, {1, 0}, {-1, 0}}
 	isMatched := false
 
 	// 预处理: 统计board中每个字符的个数
 	for i := 0; i < r; i++ {
 		for j := 0; j < c; j++ {
-			total[board[i][j] - 'a']++
+			total[board[i][j]-'a']++
 		}
 	}
 	// 剪枝优化
@@ -34,7 +33,7 @@ func findWords(board [][]byte, words []string) []string {
 	checkValid := func(word string) bool {
 		totalInW := make([]byte, 26)
 		for _, w := range word {
-			totalInW[w - 'a']++
+			totalInW[w-'a']++
 		}
 		for i := 0; i < 26; i++ {
 			if total[i] < totalInW[i] {
@@ -43,18 +42,18 @@ func findWords(board [][]byte, words []string) []string {
 		}
 		return true
 	}
-  var dfs func([][]byte, string, int, int, int) bool
-  dfs = func(board [][]byte, str string, i, j, l int) bool {
-  	fmt.Printf("searching index:%v,%v, l:%v\n", i, j, l)
-  	// 终止条件
-  	// 当递归到超过匹配字符串的长度时，匹配结束
-  	if l == len(str)  {
+	var dfs func([][]byte, string, int, int, int) bool
+	dfs = func(board [][]byte, str string, i, j, l int) bool {
+		fmt.Printf("searching index:%v,%v, l:%v\n", i, j, l)
+		// 终止条件
+		// 当递归到超过匹配字符串的长度时，匹配结束
+		if l == len(str) {
 			// fmt.Printf("return string:%v,%v, l:%v\n", i, j, l)
-  		if !isMatched {
+			if !isMatched {
 				rets = append(rets, str)
 				isMatched = true
 			}
-  		return isMatched
+			return isMatched
 		}
 		// 如果与当前字符串相等
 		// 可以继续搜索下去
@@ -65,7 +64,7 @@ func findWords(board [][]byte, words []string) []string {
 		} else {
 			//  如果下一个字符比较已经出现超过匹配字符串的长度
 			//  那么也将终止
-			if l + 1 == len(str) {
+			if l+1 == len(str) {
 				if !isMatched {
 					rets = append(rets, str)
 					isMatched = true
@@ -83,7 +82,7 @@ func findWords(board [][]byte, words []string) []string {
 			// 1. 下标位置需要满足的边界
 			// 2. 访问过的位置不能重复（通过将访问过位置的元素置为一个特殊值来界定）
 			if nx >= 0 && nx < r && ny >= 0 && ny < c && board[nx][ny] != '0' {
-				dfs(board, str, nx, ny, l + 1)
+				dfs(board, str, nx, ny, l+1)
 			}
 		}
 		// 四个方向都尝试过后
