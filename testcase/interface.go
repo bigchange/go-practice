@@ -9,7 +9,7 @@ type Foo interface {
 func SUT(f Foo) {
 	// ...
 	ret := f.Bar(99)
-	fmt.Println(ret)
+	fmt.Printf("SUT ret: %v \n", ret)
 }
 
 

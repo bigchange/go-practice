@@ -8,10 +8,12 @@ import (
 func (s *ExampleTestSuite) TestFoo() {
 	ctrl := gomock.NewController(s.T())
 	m := mockinterfce.NewMockFoo(ctrl)
-	m.EXPECT().Bar(gomock.Eq(99)).Return(103)
-	SUT(m)
-	m.EXPECT().Bar(gomock.Eq(99)).DoAndReturn(func(_ int) int {
+	m.EXPECT().Bar(gomock.Eq(98)).DoAndReturn(func(_ int) int {
 		return 104
+	})
+	m.Bar(98)
+	m.EXPECT().Bar(gomock.Eq(99)).DoAndReturn(func(_ int) int {
+		return 103
 	})
 	SUT(m)
 }
