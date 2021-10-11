@@ -10,6 +10,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/bigchange/go-practice/testcase/db"
 	mockdb "github.com/bigchange/go-practice/testcase/db/mockgen"
 	"github.com/bigchange/go-practice/testcase/hub"
 	"github.com/bigchange/go-practice/testcase/middleware"
@@ -37,9 +38,12 @@ func TestHandler1(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockdb := mockdb.NewMockDB(ctrl)
+	// 方式一： 通过context传入hub
 	engine.Use(middleware.SetHub(&hub.Hub{
 		PrimaryDB: mockdb ,
 	}))
+	// 方式二： 初始化不同模块中单例
+	db.SetDB(mockdb)
 	engine.GET(path, Handler1)
 
 	t.Run("param error", func(t *testing.T) {

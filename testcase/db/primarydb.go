@@ -7,21 +7,24 @@ import (
 	"github.com/go-xorm/xorm"
 )
 
-var pdbInstance *primaryDB
+var db DB
 
 type primaryDB struct {
 	engine *xorm.Engine
 }
 
 func New(engine *xorm.Engine) DB {
-	pdbInstance = &primaryDB{engine}
-	return pdbInstance
+	db = &primaryDB{engine}
+	return db
 }
 
-func GetPrimaryDB()  DB {
-	return pdbInstance
+func GetDB()  DB {
+	return db
 }
 
+func SetDB(p DB) {
+	db = p
+}
 func (p *primaryDB) GetData(ctx context.Context, i int64) (*model.M1, error) {
 	panic("implement me")
 }
