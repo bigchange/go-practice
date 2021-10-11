@@ -1,7 +1,7 @@
-package testcase
+package test
 
 import (
-	mockinterfce "github.com/bigchange/go-practice/testcase/mockgen"
+	mockinterfce "github.com/bigchange/go-practice/testcase/test/mockgen"
 	"github.com/golang/mock/gomock"
 )
 

@@ -1,4 +1,4 @@
-package testcase
+package test
 
 // Basic imports
 import (
