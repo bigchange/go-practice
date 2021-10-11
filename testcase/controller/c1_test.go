@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -65,6 +66,13 @@ func TestHandler1(t *testing.T) {
 		engine.ServeHTTP(rr, req)
 
 		assert.Equal(t, http.StatusInternalServerError, rr.Code)
+		/*
+		// Test failed contain in return
+		// Not pass: why?
+		bodyBytes, err := ioutil.ReadAll(rr.Body)
+		assert.NoError(t, err)
+		assert.Contains(t, string(bodyBytes), "failed")
+		 */
 	})
 
 	t.Run("success", func(t *testing.T) {
@@ -79,6 +87,9 @@ func TestHandler1(t *testing.T) {
 		rr := httptest.NewRecorder()
 		engine.ServeHTTP(rr, req)
 		assert.Equal(t, http.StatusOK, rr.Code)
+		bodyBytes, err := ioutil.ReadAll(rr.Body)
+		assert.NoError(t, err)
+		assert.Contains(t, string(bodyBytes), "100")
 
 
 	})
