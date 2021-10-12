@@ -58,7 +58,7 @@ func NewMaxHeap(a []int, heapSize int) {
 
 
 func buildHeap(a []int, heapSize int, maxOrMinCmp func(int, int, int) int) {
-	for i := len(a) / 2 ; i >= 0; i-- {
+	for i := heapSize / 2 ; i >= 0; i-- {
 		adjustHeap(a, i, heapSize, maxOrMinCmp)
 	}
 }
