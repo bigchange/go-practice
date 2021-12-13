@@ -55,6 +55,7 @@ public class SudokuSolver37 {
       for (int i = 1; i <= 9; i++) {
         char candidate = Character.forDigit(i, 10);
         if (isValid(board, candidate, row, column)) {
+          // 确定走当前选择, 并在该位置放置对应的数字：candidate
           place_candidate(board, candidate, row, column);
           if (row == board.length - 1 && column == board[0].length - 1) {
             // fill over and Sudoku puzzle will have a unique solution.
@@ -67,11 +68,14 @@ public class SudokuSolver37 {
             return;
           } else {
             if (column + 1 == board[0].length) {
+              // 往下一层继续走
               backtracking(board, row + 1, 0);
             } else {
+              // 往右继续走
               backtracking(board, row, column + 1);
             }
           }
+          // 回退，不走当前选择， 将该位置的值重置为初始值：'.'
           remove_candidate(board, '.', row, column);
         }
       }
@@ -86,9 +90,11 @@ public class SudokuSolver37 {
         // if return, it will not to try another case, much faster
         return;
       } else {
+        // 同理： 往下一层继续走
         if (column + 1 == board[0].length) {
           backtracking(board, row + 1, 0);
         } else {
+          // 同理：往右继续走
           backtracking(board, row, column + 1);
         }
       }

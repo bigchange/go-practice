@@ -8,6 +8,19 @@ type minheap struct {
 	arr []int
 }
 
+// 排序的过程：
+// 不断将跟节点（最小元素）与 堆末尾元素交互
+// 每交换一次，重新调整heap， heap的大小减1
+// 交换 size - 1 次之后， 就算排好了序
+func (m *minheap) sort(size int) {
+	m.buildMinHeap(size)
+	for i := size - 1; i > 0; i-- {
+		// Move current root to end
+		m.swap(0, i)
+		m.downHeapify(0, i)
+	}
+}
+
 // 初始化heap
 func newMinHeap(arr []int) *minheap {
 	minheap := &minheap{
@@ -73,18 +86,6 @@ func (m *minheap) buildMinHeap(size int) {
 	}
 }
 
-// 排序的过程：
-// 不断将跟节点（最小元素）与 堆末尾元素交互
-// 每交换一次，重新调整heap， heap的大小减1
-// 交换 size - 1 次之后， 就算排好了序
-func (m *minheap) sort(size int) {
-	m.buildMinHeap(size)
-	for i := size - 1; i > 0; i-- {
-		// Move current root to end
-		m.swap(0, i)
-		m.downHeapify(0, i)
-	}
-}
 
 // 打印heap
 func (m *minheap) print() {
