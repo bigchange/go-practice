@@ -13,7 +13,7 @@ import (
 	"runtime"
 	"sync"
 
-	"github.com/bigchange/go-practice/leetcode"
+	"github.com/bigchange/go-practice/leetcode/golang"
 )
 
 func tutorialsEntry() {

@@ -10,9 +10,25 @@ func Entry() {
 	var s string
 	flag.StringVar(&s, "s", "", "input string")
 	flag.Parse()
-	ret := findNumberOfLIS([]int{-100,-100,0,0,0,100,100,0,0})
+	root := &TreeNode{
+		Val: 1,
+		Left: &TreeNode{
+			Val: 2,
+			Right: &TreeNode{
+				Val: 4,
+			},
+		},
+		Right: &TreeNode{
+			Val: 3,
+		},
 
-	fmt.Printf("ret:[%v]\n", ret)
+	}
+	ret := printTree(root)
 
-	fmt.Printf("leetCode Entry return:%v \n", ret)
+	for _, item := range ret {
+		for _, i := range item{
+			fmt.Print(i + " ")
+		}
+		fmt.Println("\n")
+	}
 }

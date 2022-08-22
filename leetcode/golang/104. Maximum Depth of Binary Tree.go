@@ -12,13 +12,6 @@ func maxDepth(root *TreeNode) int {
 	return max(maxDepth(root.Left), maxDepth(root.Right)) + 1
 }
 
-func max(x int, y int) int {
-	if x > y {
-		return x
-	}
-	return y
-}
-
 // 2. iterative solution
 // 有点按层遍历的感觉， 就是一层一层输出，
 // 每输出一层的时候，把该层的子节点入队列
