@@ -88,10 +88,28 @@ func IsNumeric(c rune) bool {
 	}
 	return false
 }
-
+func nextPowOf2(cap int) int {
+	if cap < 2 {
+		return 2
+	}
+	if cap&(cap-1) == 0 {
+		return cap
+	}
+	cap |= cap >> 1
+	fmt.Println("cap:", cap)
+	cap |= cap >> 2
+	fmt.Println("cap:", cap)
+	cap |= cap >> 4
+	fmt.Println("cap:", cap)
+	cap |= cap >> 8
+	fmt.Println("cap:", cap)
+	cap |= cap >> 16
+	fmt.Println("cap:", cap)
+	return cap + 1
+}
 
 func TestF() {
-
+	//
 }
 
 // 返回生成自然数序列的管道: 2, 3, 4, ...
