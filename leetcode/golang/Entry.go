@@ -10,5 +10,5 @@ func Entry() {
 	var s string
 	flag.StringVar(&s, "s", "", "input string")
 	flag.Parse()
-	fmt.Println(canBeEqual([]int{1,2,3,4}, []int{2,4,1,3}))
+	fmt.Println(findClosestElements([]int{-2,-1,1,2,3,4,5},7,3))
 }

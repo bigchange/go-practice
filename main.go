@@ -109,10 +109,10 @@ func nextPowOf2(cap int) int {
 }
 
 func TestF() {
-	//
+	// 
 }
 
-// 返回生成自然数序列的管道: 2, 3, 4, ...
+// GenerateNatural 返回生成自然数序列的管道: 2, 3, 4, ...
 func GenerateNatural(ctx context.Context) chan int {
 	ch := make(chan int)
 	go func() {
@@ -128,7 +128,7 @@ func GenerateNatural(ctx context.Context) chan int {
 	return ch
 }
 
-// 管道过滤器: 删除能被素数整除的数
+// PrimeFilter 管道过滤器: 删除能被素数整除的数
 func PrimeFilter(ctx context.Context, in <-chan int, prime int) chan int {
 	out := make(chan int)
 	go func() {
@@ -158,8 +158,7 @@ type noCopy struct{}
 func (*noCopy) Lock()   {}
 func (*noCopy) Unlock() {}
 
-
-// 接口完整性检查: 强验证
+// Shape 接口完整性检查: 强验证
 type Shape interface {
 	String()
 }
