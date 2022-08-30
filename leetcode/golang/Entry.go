@@ -10,5 +10,20 @@ func Entry() {
 	var s string
 	flag.StringVar(&s, "s", "", "input string")
 	flag.Parse()
-	fmt.Println(findClosestElements([]int{-2,-1,1,2,3,4,5},7,3))
+	ret := insertIntoMaxTree(&TreeNode{
+		Val: 5,
+		Left: &TreeNode{
+			Val: 2,
+			Right: &TreeNode{
+				Val: 1,
+			},
+		},
+		Right: &TreeNode{
+			Val: 3,
+		},
+	}, 6)
+	for _, i := range printTree(ret) {
+		fmt.Println(i)
+	}
+
 }

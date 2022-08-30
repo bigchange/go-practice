@@ -6,6 +6,7 @@ import (
 	"strconv"
 )
 
+// 入口
 func printTree(root *TreeNode) [][]string {
 	h := getTreeHeight(root)
 	height := h - 1
