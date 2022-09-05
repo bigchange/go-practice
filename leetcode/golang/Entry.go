@@ -13,23 +13,25 @@ func Entry() {
 	nodes  := findDuplicateSubtrees(&TreeNode{
 		Val: 5,
 		Left: &TreeNode{
-			Val: 4,
+			Val: 2,
 			Right: &TreeNode{
-				Val: 1,
+				Val: 4,
 			},
 			Left: &TreeNode{
 				Val: 1,
 			},
 		},
 		Right: &TreeNode{
-			Val: 5,
+			Val: 2,
 			Right: &TreeNode{
-				Val: 5,
+				Val: 4,
+			},
+			Left: &TreeNode{
+				Val: 1,
 			},
 		},
 	})
 	for _,i := range nodes {
-		fmt.Println(printTree(i))
+		fmt.Println("res:", printTree(i))
 	}
-	fmt.Println(isSameTree(&TreeNode{Val: 1}, &TreeNode{Val: 1}))
 }

@@ -1,7 +1,6 @@
 package leetcode
 
 import (
-	"fmt"
 	"math"
 	"strconv"
 )
@@ -23,7 +22,6 @@ func printTree(root *TreeNode) [][]string {
 	// 填充矩阵
 	rootR := 0
 	rootC := (n - 1) / 2
-	fmt.Println("h:", height - 1)
 	// 递归填充矩阵， 从根结点所在的行开始
 	fillTreeNode(root, res, rootR, rootC, height)
 	return res
