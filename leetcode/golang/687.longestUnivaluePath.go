@@ -1,11 +1,5 @@
-/*
- * @Author: Jerry You
- * @CreatedDate: 2022/9/2
- * @Last Modified by: lolaliva
- * @Last Modified time: 2022/9/2 23:19
- */
+// Package leetcode /*
 package leetcode
-
 
 /**
  * Definition for a binary tree node.

@@ -10,20 +10,26 @@ func Entry() {
 	var s string
 	flag.StringVar(&s, "s", "", "input string")
 	flag.Parse()
-	ret := insertIntoMaxTree(&TreeNode{
+	nodes  := findDuplicateSubtrees(&TreeNode{
 		Val: 5,
 		Left: &TreeNode{
-			Val: 2,
+			Val: 4,
 			Right: &TreeNode{
+				Val: 1,
+			},
+			Left: &TreeNode{
 				Val: 1,
 			},
 		},
 		Right: &TreeNode{
-			Val: 3,
+			Val: 5,
+			Right: &TreeNode{
+				Val: 5,
+			},
 		},
-	}, 6)
-	for _, i := range printTree(ret) {
-		fmt.Println(i)
+	})
+	for _,i := range nodes {
+		fmt.Println(printTree(i))
 	}
-
+	fmt.Println(isSameTree(&TreeNode{Val: 1}, &TreeNode{Val: 1}))
 }

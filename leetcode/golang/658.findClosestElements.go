@@ -5,6 +5,8 @@ import (
 	"sort"
 )
 
+// 入口
+// 找到里指定元素x，距离最近的k个元素
 func findClosestElements(arr []int, k int, x int) []int {
 	// x 在最左边
 	if  x <= arr[0] {
