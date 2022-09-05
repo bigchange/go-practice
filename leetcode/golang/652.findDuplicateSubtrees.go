@@ -6,6 +6,7 @@ import (
 )
 
 // 入口
+// 深度搜索
 func findDuplicateSubtrees(root *TreeNode) []*TreeNode {
 	var sameTrees []*TreeNode
 	keyMap := make(map[string]int)
@@ -23,7 +24,9 @@ func findDuplicateSubtrees(root *TreeNode) []*TreeNode {
 		rs := dfs(r.Right)
 		sb.WriteString("_"+ rs)
 		retKey := sb.String()
+		// 某一个子树对应的标识
 		keyMap[retKey]++
+		// 如果累积值到了2，那么就存在相同的子树，添加到结果集合中
 		if keyMap[retKey] == 2 {
 			sameTrees = append(sameTrees, r)
 		}
