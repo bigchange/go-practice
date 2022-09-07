@@ -10,6 +10,6 @@ func Entry() {
 	var s string
 	flag.StringVar(&s, "s", "", "input string")
 	flag.Parse()
-	total  := uniqueLetterString_2("LEETCODE")
+	total  := reorderSpaces("a")
 	fmt.Println("total", total)
 }
