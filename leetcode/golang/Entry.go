@@ -10,6 +10,6 @@ func Entry() {
 	var s string
 	flag.StringVar(&s, "s", "", "input string")
 	flag.Parse()
-	total  := reorderSpaces("a")
+	total  := constructArray(91, 19)
 	fmt.Println("total", total)
 }
