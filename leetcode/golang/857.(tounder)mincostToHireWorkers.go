@@ -12,6 +12,7 @@ import (
 	"sort"
 )
 
+// 入口
 func mincostToHireWorkers(quality, wage []int, k int) float64 {
 	n := len(quality)
 	h := make([]int, n)
