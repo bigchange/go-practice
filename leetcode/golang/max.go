@@ -6,3 +6,10 @@ func max(x int, y int) int {
 	}
 	return y
 }
+
+func maxFloat(x float64, y float64) float64  {
+	if x > y {
+		return x
+	}
+	return y
+}
