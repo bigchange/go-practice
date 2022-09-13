@@ -13,7 +13,7 @@ func Entry() {
 	//q := []int{10, 20, 5}
 	//w := []int{70, 50, 30}
 	//k := 2
-	res := maximumSwap(5735266)
+	res := maximumSwap(98368)
 	fmt.Println("res", res)
 }
 
