@@ -10,10 +10,10 @@ func Entry() {
 	var s string
 	flag.StringVar(&s, "s", "", "input string")
 	flag.Parse()
-	q := []int{10, 20, 5}
-	w := []int{70, 50, 30}
-	k := 2
-	res := mincostToHireWorkers(q, w, k)
+	//q := []int{10, 20, 5}
+	//w := []int{70, 50, 30}
+	//k := 2
+	res := maximumSwap(5735266)
 	fmt.Println("res", res)
 }
 
