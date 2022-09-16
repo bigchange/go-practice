@@ -13,7 +13,7 @@ func Entry() {
 	//q := []int{10, 20, 5}
 	//w := []int{70, 50, 30}
 	//k := 2
-	res := maximumSwap(98368)
+	res := trimMean([]int{})
 	fmt.Println("res", res)
 }
 
