@@ -9,6 +9,8 @@ package leetcode
  * }
  */
 // 深度搜索
+// 一层层递归到最底部，然后一层层慢慢往上返回递归
+// 递归的同时，交换对应的节点的值，注意不是交换节点
 // 同时遍历左右子树
 func reverseOddLevels(root *TreeNode) *TreeNode {
 	dfs(root.Left, root.Right, true)
