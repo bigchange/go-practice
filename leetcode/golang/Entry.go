@@ -17,7 +17,7 @@ func Entry() {
 	//q := []int{10, 20, 5}
 	//w := []int{70, 50, 30}
 	//k := 2
-	res := flipLights(n,p)
+	res := canPartitionKSubsets([]int{9,6,1,8,4,3,4,1,7,3,7,4,5,3,2,3}, 10)
 	fmt.Println("res", res)
 }
 
