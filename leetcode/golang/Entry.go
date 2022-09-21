@@ -3,6 +3,7 @@ package leetcode
 import (
 	"flag"
 	"fmt"
+	"time"
 )
 
 func Entry() {
@@ -14,11 +15,13 @@ func Entry() {
 	flag.IntVar(&p, "p", 1, "input p")
 	flag.StringVar(&s, "s", "", "input string")
 	flag.Parse()
-	//q := []int{10, 20, 5}
-	//w := []int{70, 50, 30}
-	//k := 2
-	res := canPartitionKSubsets([]int{9,6,1,8,4,3,4,1,7,3,7,4,5,3,2,3}, 10)
-	fmt.Println("res", res)
+	t1  := time.Now()
+	res := TODO()
+	fmt.Println("res", res, time.Since(t1))
+}
+
+func TODO() int {
+	return 0
 }
 
 func printTrees(root *TreeNode) {
