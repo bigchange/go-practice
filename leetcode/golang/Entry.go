@@ -20,7 +20,9 @@ func Entry() {
 	fmt.Println("res", res, time.Since(t1))
 }
 
-func TODO() int {
+func TODO() int{
+	// begin
+	// end
 	return 0
 }
 
