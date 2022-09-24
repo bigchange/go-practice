@@ -15,14 +15,16 @@ func Entry() {
 	flag.IntVar(&p, "p", 1, "input p")
 	flag.StringVar(&s, "s", "", "input string")
 	flag.Parse()
-	t1  := time.Now()
-	res := TODO()
-	fmt.Println("res", res, time.Since(t1))
+	TODO()
 }
 
 func TODO() int{
+	t1  := time.Now()
+	var res interface{}
 	// begin
+	res = 0
 	// end
+	fmt.Println("res", res, time.Since(t1))
 	return 0
 }
 
