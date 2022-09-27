@@ -28,27 +28,28 @@ import "sort"
 // CheckPermutation
 // leetcode submit region begin(Prohibit modification and deletion)
 // 方法一： 哈希表
-//  直接统计s1和s2中每个字符的个数，然后比较每个字符的出现次数是否相等
+// 直接统计s1和s2中每个字符的个数，然后比较每个字符的出现次数是否相等
+// 为了减少内存的使用，可以只用一个map来比较
 func CheckPermutation(s1 string, s2 string) bool {
-	m1 := make(map[int32]int)
-	m2 := make(map[int32]int)
 	if len(s1) != len(s2) {
 		return  false
 	}
-	for _, i := range s1 {
-		m1[i]++
+	m1 := make(map[uint8]int)
+	i := 0
+	for i < len(s1) {
+		m1[s1[i] - 'a']++
+		i++
 	}
-	for _, i := range s2 {
-		m2[i]++
-	}
-	for k,v := range m1 {
-		if m2[k] != v {
+	j := 0
+	for j < len(s2) {
+		m1[s2[j] - 'a']--
+		if m1[s2[j] - 'a'] < 0 {
 			return false
 		}
+		j++
 	}
 	return true
 }
-//leetcode submit region end(Prohibit modification and deletion)
 
 // CheckPermutation_2
 // 方法二： 排序
@@ -57,14 +58,8 @@ func CheckPermutation_2( s1 string, s2 string) bool {
 	if len(s1) != len(s2) {
 		return  false
 	}
-	var s11 []int32
-	var s22 []int32
-	for _, i := range s1 {
-		s11 = append(s11, i)
-	}
-	for _, i := range s2 {
-		s22 = append(s22, i)
-	}
+	var s11 = []byte(s1)
+	var s22 = []byte(s2)
 	sort.Slice(s11, func(i, j int) bool {
 		return s11[i] < s11[j]
 	})
@@ -80,3 +75,4 @@ func CheckPermutation_2( s1 string, s2 string) bool {
 	}
 	return true
 }
+//leetcode submit region end(Prohibit modification and deletion)
