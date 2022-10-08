@@ -52,7 +52,7 @@ func advantageCount(nums1 []int, nums2 []int) []int {
 	var items = make([]Item, len(nums2))
 	for i := 0; i < len(nums2); i++ {
 		items[i] = Item{
-			Num: nums2[i],
+			Num:   nums2[i],
 			Index: i,
 		}
 	}
@@ -69,7 +69,7 @@ func advantageCount(nums1 []int, nums2 []int) []int {
 			k++
 		}
 		// 如果k超过最大下标
-		if  k >= len(nums1) {
+		if k >= len(nums1) {
 			// 随便找一个未被标记的即可
 			for j < len(nums1) && flags[j] != 0 {
 				j++
@@ -87,6 +87,43 @@ func advantageCount(nums1 []int, nums2 []int) []int {
 		}
 	}
 	return nums2
+}
+
+// 方法二： 排序 + 双指针
+func advantageCount_2(nums1 []int, nums2 []int) []int {
+	n := len(nums1)
+	idx1 := make([]int, n)
+	idx2 := make([]int, n)
+	// 构造用来排序的下标数组
+	for i := 1; i < n; i++ {
+		idx1[i] = i
+		idx2[i] = i
+	}
+	// 按照元素大小将对应的下标排好序，就等同于将nums排好序了
+	// 👍
+	sort.Slice(idx1, func(i, j int) bool {
+		return nums1[idx1[i]] < nums1[idx1[j]]
+	})
+	sort.Slice(idx2, func(i, j int) bool {
+		return nums2[idx2[i]] < nums2[idx2[j]]
+	})
+	ans := make([]int, n)
+	// 双指针
+	// left: 队首
+	// right: 队尾
+	left, right := 0, n-1
+	for i := 0; i < n; i++ {
+		// 放队首
+		if nums1[idx1[i]] > nums2[idx2[left]] {
+			ans[idx2[left]] = nums1[idx1[i]]
+			left++
+		} else {
+			// 放队尾
+			ans[idx2[right]] = nums1[idx1[i]]
+			right--
+		}
+	}
+	return ans
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
