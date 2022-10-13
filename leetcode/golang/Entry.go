@@ -22,7 +22,7 @@ func TODO() int{
 	t1  := time.Now()
 	var res interface{}
 	// begin
-	res = 0
+	res = maxChunksToSorted([]int{0,4,2,3,1})
 	// end
 	fmt.Println("res", res, time.Since(t1))
 	return 0
