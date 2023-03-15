@@ -11,6 +11,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/bigchange/go-practice/leetcode/tutorials/sort"
 	"runtime"
 	"sync"
 	"sync/atomic"
@@ -210,30 +211,17 @@ func processRequest(size int) {
 }
 
 func TestF() {
-	//
-	v := V{A: "A", B: "B"}
-	v.setA("a")
-	v.setB("b")
-	fmt.Printf("A:%v, B:%v\n", v.A, v.B)
-
-	getP()
-	SetValue(100)
-	// Block()
-	// Mutex()
-	// PoolTest()
-	var one = new(Once)
-	var wg sync.WaitGroup
-	runNum := 1000
-	wg.Add(runNum)
-	for i:= 0; i < runNum; i++ {
-		go func() {
-			one.Do(func() {
-				fmt.Println("init once fun logic")
-			})
-			wg.Done()
-		}()
+	arr := []int {6,4,5,3,1,2}
+	sort.NewMinHeap(arr, len(arr))
+	PrintArr(arr)
+	sort.MinHeapSort(arr)
+	PrintArr(arr)
+}
+func PrintArr(arr []int) {
+	for _, r := range arr {
+		fmt.Print(fmt.Sprintf("%v ", r))
 	}
-	wg.Wait()
+	fmt.Println("\n")
 }
 type Once struct {
 	m    sync.Mutex
