@@ -8,10 +8,13 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"runtime"
 	"sync"
+	"sync/atomic"
+	"time"
 
 	"github.com/bigchange/go-practice/leetcode/golang"
 )
@@ -34,7 +37,7 @@ func main() {
 
 }
 
-func meituan ()  {
+func meituan() {
 	var n int
 	fmt.Scanln(&n)
 	var strs []string
@@ -108,9 +111,147 @@ func nextPowOf2(cap int) int {
 	return cap + 1
 }
 
-func TestF() {
-	// 
+// -------- testF start ---- //
+
+type V struct {
+	A string
+	B string
 }
+
+func (v V) setA(a string) {
+	v.A = a
+}
+func (v V) setB(b string) {
+	v.B = b
+}
+
+func getP() {
+	fmt.Println("NumCPU:", runtime.GOMAXPROCS(runtime.NumCPU()))
+}
+
+var value int32
+
+func SetValue(delta int32) {
+	for {
+		v := value
+		if atomic.CompareAndSwapInt32(&value, v, v + delta) {
+			fmt.Println("value:", value)
+			break
+		}
+	}
+}
+type MyMutex struct {
+	count int
+	sync.Mutex
+}
+func Mutex() {
+	var mu MyMutex
+	mu.Lock()
+	var mu2 = mu
+	mu.count++
+	mu.Unlock()
+	fmt.Println(mu.count, mu2.count)
+	mu2.Lock()
+	mu2.count++
+	mu2.Unlock()
+	fmt.Println(mu.count, mu2.count)
+}
+func Block() {
+	var i byte
+	runtime.GOMAXPROCS(1)
+	go func() {
+		for i = 0; i <= 255; i++ {
+
+		}
+	}()
+	runtime.Gosched()
+	runtime.GC()
+
+  // panic
+	var wg sync.WaitGroup
+	wg.Add(1)
+	go func() {
+		time.Sleep(time.Millisecond)
+		wg.Done()
+		wg.Add(1)
+	}()
+	wg.Wait()
+
+}
+
+var poolNew = sync.Pool{New: func() interface{} { return new(bytes.Buffer) }}
+func PoolTest() {
+	go func() {
+		for {
+			processRequest(1 << 28) // 256MiB
+		}
+	}()
+	for i := 0; i < 1000; i++ {
+		go func() {
+			for {
+				processRequest(1 << 10) // 1KiB
+			}
+		}()
+	}
+	var stats runtime.MemStats
+	for i := 0; ; i++ {
+		runtime.ReadMemStats(&stats)
+		fmt.Printf("Cycle %d: %dB\n", i, stats.Alloc)
+		time.Sleep(time.Second)
+		runtime.GC()
+	}
+}
+func processRequest(size int) {
+	b := poolNew.Get().(*bytes.Buffer)
+	time.Sleep(500 * time.Millisecond)
+	b.Grow(size)
+	poolNew.Put(b)
+	time.Sleep(1 * time.Millisecond)
+}
+
+func TestF() {
+	//
+	v := V{A: "A", B: "B"}
+	v.setA("a")
+	v.setB("b")
+	fmt.Printf("A:%v, B:%v\n", v.A, v.B)
+
+	getP()
+	SetValue(100)
+	// Block()
+	// Mutex()
+	// PoolTest()
+	var one = new(Once)
+	var wg sync.WaitGroup
+	runNum := 1000
+	wg.Add(runNum)
+	for i:= 0; i < runNum; i++ {
+		go func() {
+			one.Do(func() {
+				fmt.Println("init once fun logic")
+			})
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+}
+type Once struct {
+	m    sync.Mutex
+	done uint32
+}
+func (o *Once) Do(f func()) {
+	if o.done == 1 {
+		return
+	}
+	o.m.Lock()
+	defer o.m.Unlock()
+	if o.done == 0 {
+		o.done = 1
+		f()
+	}
+}
+
+// -------- testF end ---- //
 
 // GenerateNatural 返回生成自然数序列的管道: 2, 3, 4, ...
 func GenerateNatural(ctx context.Context) chan int {
@@ -118,7 +259,7 @@ func GenerateNatural(ctx context.Context) chan int {
 	go func() {
 		for i := 2; ; i++ {
 			select {
-			case <- ctx.Done():
+			case <-ctx.Done():
 				return
 			case ch <- i:
 				fmt.Printf("generated %v\n", i)
@@ -135,7 +276,7 @@ func PrimeFilter(ctx context.Context, in <-chan int, prime int) chan int {
 		for {
 			if i := <-in; i%prime != 0 {
 				select {
-				case <- ctx.Done():
+				case <-ctx.Done():
 					return
 				case out <- i:
 					fmt.Printf("output %v\n", i)
@@ -146,14 +287,15 @@ func PrimeFilter(ctx context.Context, in <-chan int, prime int) chan int {
 	return out
 }
 
-
 var pool *sync.Pool
+
 type Person struct {
 	Name string
 	noCopy
 }
 
 type noCopy struct{}
+
 // Lock 是一个空操作用来给 `go vet` 的 -copylocks 静态分析
 func (*noCopy) Lock()   {}
 func (*noCopy) Unlock() {}
@@ -163,7 +305,7 @@ type Shape interface {
 	String()
 }
 
-type Circle struct {}
+type Circle struct{}
 
 type Rectangle struct {
 	Square
@@ -182,7 +324,6 @@ func (s Square) String() {
 // compile passed
 var _ Shape = (*Square)(nil)
 var _ Shape = (*Rectangle)(nil)
-
 
 func noCopyPerson(p *Person) {
 	p.Name = "noCopyPerson"
@@ -226,7 +367,6 @@ func TestSyncPool() {
 	}
 }
 
-
 type VisitorFunc func(*Info, error) error
 
 type Visitor interface {
@@ -238,10 +378,10 @@ type Info struct {
 	Name        string
 	OtherThings string
 }
+
 func (info *Info) Visit(fn VisitorFunc) error {
 	return fn(info, nil)
 }
-
 
 type NameVisitor struct {
 	visitor Visitor
@@ -259,7 +399,6 @@ func (v NameVisitor) Visit(fn VisitorFunc) error {
 	})
 }
 
-
 type OtherThingsVisitor struct {
 	visitor Visitor
 }
@@ -275,7 +414,6 @@ func (v OtherThingsVisitor) Visit(fn VisitorFunc) error {
 		return err
 	})
 }
-
 
 type LogVisitor struct {
 	visitor Visitor
@@ -322,54 +460,54 @@ func (v DecoratedVisitor) Visit(fn VisitorFunc) error {
 
 func DecoratedVisitorLoadFile() {
 
-		info := Info{}
-		var v Visitor = &info
+	info := Info{}
+	var v Visitor = &info
 
-		NameVisitorFunc := func(info *Info, err error) error {
-			fmt.Println("NameVisitor() before call function")
-			if err == nil {
-				fmt.Printf("==> Name=%s, NameSpace=%s\n", info.Name, info.Namespace)
-			}
-			fmt.Println("NameVisitor() after call function")
-			return err
+	NameVisitorFunc := func(info *Info, err error) error {
+		fmt.Println("NameVisitor() before call function")
+		if err == nil {
+			fmt.Printf("==> Name=%s, NameSpace=%s\n", info.Name, info.Namespace)
 		}
-		LogVisitorFunc := func(info *Info, err error) error {
-			fmt.Println("LogVisitor() before call function")
-			fmt.Println("LogVisitor() after call function")
-			return err
-		}
+		fmt.Println("NameVisitor() after call function")
+		return err
+	}
+	LogVisitorFunc := func(info *Info, err error) error {
+		fmt.Println("LogVisitor() before call function")
+		fmt.Println("LogVisitor() after call function")
+		return err
+	}
 
-		OtherThingsVisitorFunc := func(info *Info, err error) error {
-			fmt.Println("OtherThingsVisitor() before call function")
-			if err == nil {
-				fmt.Printf("==> OtherThings=%s\n", info.OtherThings)
-			}
-			fmt.Println("OtherThingsVisitor() after call function")
-			return err
+	OtherThingsVisitorFunc := func(info *Info, err error) error {
+		fmt.Println("OtherThingsVisitor() before call function")
+		if err == nil {
+			fmt.Printf("==> OtherThings=%s\n", info.OtherThings)
 		}
+		fmt.Println("OtherThingsVisitor() after call function")
+		return err
+	}
 
-		loadFile := func(info *Info, err error) error {
-			info.Name = "Hao Chen"
-			info.Namespace = "MegaEase"
-			info.OtherThings = "We are running as remote team."
-			return nil
-		}
-	  v = NewDecoratedVisitor(v, NameVisitorFunc,LogVisitorFunc,OtherThingsVisitorFunc)
-		v.Visit(loadFile)
+	loadFile := func(info *Info, err error) error {
+		info.Name = "Hao Chen"
+		info.Namespace = "MegaEase"
+		info.OtherThings = "We are running as remote team."
+		return nil
+	}
+	v = NewDecoratedVisitor(v, NameVisitorFunc, LogVisitorFunc, OtherThingsVisitorFunc)
+	v.Visit(loadFile)
 }
 
 func NormalVisitor() {
-		info := Info{}
-		var v Visitor = &info
-		v = LogVisitor{v}
-		v = NameVisitor{v}
-		v = OtherThingsVisitor{v}
+	info := Info{}
+	var v Visitor = &info
+	v = LogVisitor{v}
+	v = NameVisitor{v}
+	v = OtherThingsVisitor{v}
 
-		loadFile := func(info *Info, err error) error {
-			info.Name = "Hao Chen"
-			info.Namespace = "MegaEase"
-			info.OtherThings = "We are running as remote team."
-			return nil
-		}
-		v.Visit(loadFile)
+	loadFile := func(info *Info, err error) error {
+		info.Name = "Hao Chen"
+		info.Namespace = "MegaEase"
+		info.OtherThings = "We are running as remote team."
+		return nil
+	}
+	v.Visit(loadFile)
 }

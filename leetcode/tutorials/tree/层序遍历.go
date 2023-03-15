@@ -6,7 +6,7 @@ func Levels(root *TreeNode) []int {
 	if root == nil {
 		return vals
 	}
-	// 栈
+	// slice模拟队列（先入先出）
 	stack :=[]*TreeNode{root}
 	for len(stack) > 0 {
 		size := len(stack)
