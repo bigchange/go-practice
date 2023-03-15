@@ -212,9 +212,7 @@ func processRequest(size int) {
 
 func TestF() {
 	arr := []int {6,4,5,3,1,2}
-	sort.NewMinHeap(arr, len(arr))
-	PrintArr(arr)
-	sort.MinHeapSort(arr)
+	sort.InsertionSort(arr)
 	PrintArr(arr)
 }
 func PrintArr(arr []int) {
