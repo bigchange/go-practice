@@ -1,6 +1,8 @@
 package tutorials
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type node struct {
 	// 数据
@@ -14,10 +16,13 @@ type doublyLinkedList struct {
 	len  int
 	tail *node
 	head *node
+	// 或者直接使用内置数据结构list.List当做双向链表的实现
 }
+
 func InitDoublyList() *doublyLinkedList {
 	return &doublyLinkedList{}
 }
+
 // 头部添加
 func (d *doublyLinkedList) AddFrontNodeDLL(data string) {
 	newNode := &node{
@@ -33,6 +38,7 @@ func (d *doublyLinkedList) AddFrontNodeDLL(data string) {
 	}
 	d.len++
 }
+
 // 尾部添加
 func (d *doublyLinkedList) AddEndNodeDLL(data string) {
 	newNode := &node{
@@ -48,6 +54,7 @@ func (d *doublyLinkedList) AddEndNodeDLL(data string) {
 	}
 	d.len++
 }
+
 // 前向遍历： 双向链表
 func (d *doublyLinkedList) TraverseForward() error {
 	if d.head == nil {
@@ -64,6 +71,7 @@ func (d *doublyLinkedList) TraverseForward() error {
 func (d *doublyLinkedList) Size() int {
 	return d.len
 }
+
 // 反转双向链表
 func (d *doublyLinkedList) ReverseDLL() {
 	currentNode := d.head

@@ -13,5 +13,5 @@ func PrintArr(arr []int) {
 	for _, r := range arr {
 		fmt.Print(fmt.Sprintf("%v ", r))
 	}
-	fmt.Println("\n")
+	fmt.Println("")
 }
