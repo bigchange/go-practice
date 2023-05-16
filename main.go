@@ -49,8 +49,7 @@ func nextPowOf2(cap int) int {
 }
 
 func TestF() {
-	le := getMaxStrLen("aaaabbbbcccccdddaaabbccdd", 5)
-	fmt.Println("maxLen:", le)
+
 }
 
 // -------- testF start ---- //
