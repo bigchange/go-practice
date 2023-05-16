@@ -9,7 +9,6 @@ package main
 
 import (
 	"fmt"
-	"reflect"
 
 	leetcode "github.com/bigchange/go-practice/leetcode/golang"
 )
@@ -50,16 +49,8 @@ func nextPowOf2(cap int) int {
 }
 
 func TestF() {
-
-	t := T{23, "skidoo"}
-	s := reflect.ValueOf(&t).Elem()
-	typeOfT := s.Type()
-	for i := 0; i < s.NumField(); i++ {
-		f := s.Field(i)
-		fmt.Printf("%d: %s %s = %v, typeOfT.Field:%v\n", i,
-			typeOfT.Field(i).Name, f.Type(), f.Interface(), typeOfT.Field(i))
-	}
-
+	le := getMaxStrLen("aaaabbbbcccccdddaaabbccdd", 5)
+	fmt.Println("maxLen:", le)
 }
 
 // -------- testF start ---- //
