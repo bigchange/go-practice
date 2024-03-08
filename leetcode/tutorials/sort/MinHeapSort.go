@@ -1,6 +1,5 @@
 package sort
 
-
 import "fmt"
 
 // 最小堆
@@ -22,6 +21,7 @@ func (m *minheap) sort(size int) {
 }
 
 // 初始化heap
+// 建堆： O(n)
 func newMinHeap(arr []int) *minheap {
 	minheap := &minheap{
 		arr: arr,
@@ -85,7 +85,6 @@ func (m *minheap) buildMinHeap(size int) {
 		m.downHeapify(index, size)
 	}
 }
-
 
 // 打印heap
 func (m *minheap) print() {
