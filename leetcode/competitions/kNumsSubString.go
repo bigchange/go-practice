@@ -3,6 +3,9 @@ package competitions
 import "fmt"
 
 // 满足字符至少出现k次的最长子串长度
+// getMaxSubStrLen 计算字符串s中所有字符至少出现k次的最长子串长度
+// 参数s是输入的字符串，参数k是字符出现次数的最小阈值
+// 返回值是满足条件的最长子串的长度
 func getMaxSubStrLen(s string, k int) int {
 	var getLen func(s int, e int) int
 	m := make(map[rune]int)

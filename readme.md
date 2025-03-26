@@ -2,15 +2,18 @@
 
 Here are some practices with different languages in leetcode mainly in Java and Golang.
 
-## leetcode
-I put problems already accepted and some tutorials here for beginners to practice in leetcode.
-Some of are too hard to understanding , so I add some explain for you to understand them more easily.
-Have fun with them.
-### cpp
-problems solved with c++.
-### java
+## [leetcode](leetcode/)
+### [competitions](leetcode/competitions/) 
+competitions for others.
+### [cpp](leetcode/cpp)
+problems solved with ++.
+### [java](leetcode/java)
 problems solver with Java.
-### tutorials 
+### [scala](leetcode/scala)
+problems solver with Scala.
+### [golang](leetcode/golang/)
+problems solver with Golang.
+### [tutorials](leetcode/tutorials/) 
 if you want to easily understand different kinds of problems, you can visit here first.
 I put some tutorials here to help you.
 

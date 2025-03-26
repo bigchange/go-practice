@@ -13,6 +13,12 @@ import (
 	"strings"
 )
 
+// CountDaysTogether 计算两个人在一段时间内重合的天数
+// arriveAlice: Alice到达的日期
+// leaveAlice: Alice离开的日期
+// arriveBob: Bob到达的日期
+// leaveBob: Bob离开的日期
+// 返回值: Alice和Bob重合的天数
 func CountDaysTogether(arriveAlice string, leaveAlice string, arriveBob string, leaveBob string) int {
 	type d struct {
 		N string
@@ -34,11 +40,11 @@ func CountDaysTogether(arriveAlice string, leaveAlice string, arriveBob string, 
 			D: arriveBob,
 		},
 		{
-			N:"a",
+			N: "a",
 			D: leaveAlice,
 		},
 		{
-			N:"b",
+			N: "b",
 			D: leaveBob,
 		},
 	}
@@ -55,11 +61,11 @@ func CountDaysTogether(arriveAlice string, leaveAlice string, arriveBob string, 
 		return calDay(ds[1].D, ds[2].D)
 	}
 }
-func calDay(start, end string)  int {
+func calDay(start, end string) int {
 	sum := 0
 	fmt.Println(start, end)
-	starts := strings.Split(start,"-")
-	ends:= strings.Split(end, "-")
+	starts := strings.Split(start, "-")
+	ends := strings.Split(end, "-")
 	days := []int{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
 	if starts[0] == ends[0] {
 		return toInt(ends[1]) - toInt(starts[1]) + 1
@@ -68,8 +74,8 @@ func calDay(start, end string)  int {
 		sd := toInt(starts[1])
 		em := toInt(ends[0])
 		ed := toInt(ends[1])
-		sum = days[sm - 1] - sd + 1
-		for i := sm ; i < em - 1; i++ {
+		sum = days[sm-1] - sd + 1
+		for i := sm; i < em-1; i++ {
 			sum += days[i]
 		}
 		sum += ed
