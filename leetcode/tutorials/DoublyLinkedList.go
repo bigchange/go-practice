@@ -14,6 +14,7 @@ type node struct {
 }
 type doublyLinkedList struct {
 	len  int
+	// （optional）头尾指针: 可考虑分别使用一个空节点来占位，这样就不需要判断头尾指针是否为空
 	tail *node
 	head *node
 	// 或者直接使用内置数据结构list.List当做双向链表的实现

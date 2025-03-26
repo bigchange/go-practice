@@ -104,6 +104,14 @@ func (bst *bst) remove(num int) {
 }
 
 // 方法一： 递归插入
+// insertRecursion 向二叉搜索树中递归插入一个节点
+//
+// 参数:
+//   node: 指向当前节点的指针，初始调用时应传入nil
+//   value: 要插入的值
+//
+// 返回值:
+//   指向插入节点的指针
 func (b *bst) insertRecursion(node *bstnode, value int) *bstnode {
 	if b.root == nil {
 		// 第一个元素插入，初始化root
@@ -126,6 +134,11 @@ func (b *bst) insertRecursion(node *bstnode, value int) *bstnode {
 }
 
 // 方法二： 迭代插入
+// insertIterative 向二叉搜索树中插入一个新的节点
+//
+// 参数:
+//   - node: 指向当前遍历到的节点的指针，初始调用时应传入 nil
+//   - value: 要插入的值
 func (b *bst) insertIterative(node *bstnode, value int) {
 	if b.root == nil {
 		b.root = &bstnode{
@@ -153,6 +166,14 @@ func (b *bst) insertIterative(node *bstnode, value int) {
 	return
 }
 
+// findIterator 在二叉搜索树中查找并返回包含指定值的节点指针
+// 如果未找到指定值，则返回 nil
+//
+// 参数:
+//     value int: 要查找的值
+//
+// 返回值:
+//     *bstnode: 包含指定值的节点指针，若未找到则返回 nil
 func (b *bst) findIterator(value int) *bstnode {
 	node := b.root
 	// 循环查找，越过叶节点后跳出

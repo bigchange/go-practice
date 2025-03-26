@@ -18,6 +18,7 @@ import (
 )
 
 // List implementation
+// 使用container/list来实现队列
 type customQueue struct {
 	queue *list.List
 }
@@ -53,6 +54,7 @@ func (c *customQueue) Empty() bool {
 }
 
 // Slice implementation
+// 基于Slice的实现方式，使用读写锁来保证并发安全
 type customQueueWithSlice struct {
 	stack []string
 	lock  sync.RWMutex

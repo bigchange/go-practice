@@ -3,6 +3,8 @@ package sort
 // 选择排序
 // O(n*n)，
 // Space Complexity of selection sort is O(1)
+// selectionSort 对整数切片进行选择排序
+// arr: 待排序的整数切片
 func selectionSort(arr []int) {
 	len := len(arr)
 	for i := 0; i < len-1; i++ {

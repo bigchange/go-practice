@@ -15,7 +15,7 @@ func permutationsI(nums []int) [][]int {
 	backtrackI(&state, &nums, &selected, &res)
 	return res
 }
-
+/* 全排列 II */
 func permutationsII(nums []int) [][]int {
 	// 排列结果存储
 	res := make([][]int, 0)

@@ -4,6 +4,19 @@ import "fmt"
 
 // 自实现Heap
 
+// refer: https://www.hello-algo.com/chapter_heap/build_heap/
+/* 构造方法，根据切片建堆，已有元素存储在切片中
+ * 时间复杂度： O(n)
+ */
+func NewMaxHeap(nums []any) *maxHeap {
+	// 将列表元素原封不动添加进堆
+	h := &maxHeap{data: nums}
+	for i := len(h.data) - 1; i >= 0; i-- {
+		// 堆化除叶节点以外的其他所有节点
+		h.siftDown(i)
+	}
+	return h
+}
 // 数据是一个一个依次加入到heap中的
 type maxHeap struct {
 	data []any
@@ -30,19 +43,7 @@ func (h *maxHeap) peek() any {
 	return h.data[0]
 }
 
-// refer: https://www.hello-algo.com/chapter_heap/build_heap/
-/* 构造方法，根据切片建堆，已有元素存储在切片中
- * 时间复杂度： O(n)
- */
-func NewMaxHeap(nums []any) *maxHeap {
-	// 将列表元素原封不动添加进堆
-	h := &maxHeap{data: nums}
-	for i := len(h.data) - 1; i >= 0; i-- {
-		// 堆化除叶节点以外的其他所有节点
-		h.siftDown(i)
-	}
-	return h
-}
+
 
 // 元素入堆： 一个一个依次入堆 , O(nlogn)
 // 给定元素 val ，我们首先将其添加到堆底。添加之后，由于 val 可能大于堆中其他元素，堆的成立条件可能已被破坏。

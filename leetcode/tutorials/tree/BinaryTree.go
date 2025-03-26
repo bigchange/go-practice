@@ -38,7 +38,8 @@ func Levels(root *TreeNode) []int {
 
 // 前中后序遍历： 递归实现（深度优先遍历），先走到尽头，再回溯继续
 // 递归过程可分为“递”和“归”两个相反的部分。
-// “递”表示开启新方法，程序在此过程中访问下一个节点；“归”表示函数返回，代表该节点已经访问完毕
+// “递”表示开启新方法，程序在此过程中访问下一个节点；
+// “归”表示函数返回，代表该节点已经访问完毕
 // refer: https://www.hello-algo.com/chapter_tree/binary_tree_traversal/#822
 func dfs(root *TreeNode) {
 	if root == nil {

@@ -1,5 +1,9 @@
 package sort
 
+// quickAscendingSort 使用快速排序算法对切片 arr 进行升序排序
+// arr: 待排序的整数切片
+// start: 排序范围的起始索引
+// end: 排序范围的结束索引
 func quickAscendingSort(arr []int, start, end int) {
 	if start < end {
 		i, j := start, end
@@ -31,6 +35,11 @@ func quickAscendingSort(arr []int, start, end int) {
 }
 
 /* 快速排序 */
+// quickSort2 使用快速排序算法对切片 nums 进行排序
+// 参数：
+// nums：待排序的整数切片
+// left：当前子数组的左边界索引
+// right：当前子数组的右边界索引
 func quickSort2(nums []int, left, right int) {
 	// 子数组长度为 1 时终止递归
 	if left >= right {
@@ -44,6 +53,15 @@ func quickSort2(nums []int, left, right int) {
 }
 
 /* 快速排序（尾递归优化）*/
+// quickSort1 对切片 nums 进行快速排序，left 和 right 分别表示要排序的切片的起始和结束索引。
+//
+// 参数：
+// nums []int: 待排序的整数切片
+// left int: 排序范围的起始索引
+// right int: 排序范围的结束索引
+//
+// 返回值：
+// 无返回值，直接对输入的切片进行排序。
 func quickSort1(nums []int, left, right int) {
 	// 子数组长度为 1 时终止
 	for left < right {
@@ -65,6 +83,10 @@ func quickSort1(nums []int, left, right int) {
 /* 哨兵划分 */
 // 哨兵的选择直接可能影响整个排序的效率，
 // 所有快排中有专门的针对哨兵划分的优化
+// partition 函数将切片 nums 中的元素按大小进行分区，
+// 使得 nums[left..i-1] 中的所有元素都不大于 nums[left]，
+// 而 nums[i+1..right] 中的所有元素都大于 nums[left]
+// 函数返回基准数 nums[left] 的索引。
 func partition(nums []int, left, right int) int {
 	// 以 nums[left] 作为基准数
 	// 注意：当我们以最左端元素为基准数时，必须先“从右往左查找”再“从左往右查找”

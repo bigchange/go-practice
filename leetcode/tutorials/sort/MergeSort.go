@@ -8,15 +8,16 @@ func mergeSort(nums []int, left, right int) {
 	}
 	// 划分阶段
 	mid := (left + right) / 2
+	// 递归划分左子数组和右子数组
 	mergeSort(nums, left, mid)
 	mergeSort(nums, mid+1, right)
-	// 合并阶段
+	// 合并阶段（合并两个有序子数组）
 	merge(nums, left, mid, right)
 }
 
 /* 合并左子数组和右子数组 */
-// 左子数组区间 [left, mid]
-// 右子数组区间 [mid + 1, right]
+// 左子数组区间 [left, mid]: 已有序
+// 右子数组区间 [mid + 1, right]: 已有序
 func merge(nums []int, left, mid, right int) {
 	// 初始化辅助数组 借助 copy 模块
 	tmp := make([]int, right-left+1)
