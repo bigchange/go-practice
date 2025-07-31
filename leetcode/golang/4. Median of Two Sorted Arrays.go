@@ -30,16 +30,16 @@ package leetcode
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	m, n := len(nums1), len(nums2)
 	pos := (m + n) / 2
-	if (m + n) % 2 == 0  {
-		r1 := getKMinNum(nums1, nums2,  pos)
-		r2 := getKMinNum(nums1, nums2, pos + 1)
+	if (m+n)%2 == 0 {
+		r1 := getKMinNum(nums1, nums2, pos)
+		r2 := getKMinNum(nums1, nums2, pos+1)
 		return (r1 + r2) / 2.0
 	}
-	r := getKMinNum(nums1, nums2,  pos + 1)
+	r := getKMinNum(nums1, nums2, pos+1)
 	return r
 }
 func min(i int, j int) int {
-	if i < j  {
+	if i < j {
 		return i
 	}
 	return j
@@ -48,18 +48,18 @@ func getKMinNum(nums1 []int, nums2 []int, k int) float64 {
 	index1, index2 := 0, 0
 	for {
 		if index2 >= len(nums2) {
-			return float64(nums1[index1 + k - 1])
+			return float64(nums1[index1+k-1])
 		}
 		if index1 >= len(nums1) {
-			return float64(nums2[index2 + k - 1])
+			return float64(nums2[index2+k-1])
 		}
 		if k == 1 {
 			return float64(min(nums2[index2], nums1[index1]))
 		}
 		half := k / 2
 		// 处理一下
-		pos1 := min(index1 + half , len(nums1)) - 1
-		pos2 := min(index2 + half, len(nums2)) - 1
+		pos1 := min(index1+half, len(nums1)) - 1
+		pos2 := min(index2+half, len(nums2)) - 1
 		if nums1[pos1] <= nums2[pos2] {
 			k = k - (pos1 - index1 + 1)
 			index1 = pos1 + 1
