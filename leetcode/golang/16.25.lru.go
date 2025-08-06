@@ -85,6 +85,7 @@ func (l *LRUCache) Put(key int, value int) {
 	}
 	v.Counter++
 	v.LastVisitTime = time.Now().UnixNano()
+	// put 相同key，可能是不同的value，需要更新对应value
 	v.Value = value
 	l.m[key] = v
 }
